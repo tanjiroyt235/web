@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZombieCraft | Premium Dark Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Oxanium:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0a0a12;
+            --darker-bg: #050509;
+            --card-bg: #121220;
+            --card-border: #2a2a4a;
+            --accent-purple: #8a2be2;
+            --accent-blue: #4169e1;
+            --accent-green: #32cd32;
+            --accent-gold: #ffd700;
+            --text-primary: #e6e6ff;
+            --text-secondary: #b0b0d0;
+            --glow-purple: 0 0 15px rgba(138, 43, 226, 0.7);
+            --glow-blue: 0 0 15px rgba(65, 105, 225, 0.5);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker-bg), var(--dark-bg));
+            color: var(--text-primary);
+            font-family: 'Oxanium', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(65, 105, 225, 0.1) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 18, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--card-border);
+            box-shadow: var(--glow-purple);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--accent-purple);
+            text-shadow: var(--glow-purple);
+        }
+
+        .logo h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            background: linear-gradient(to right, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+            text-shadow: var(--glow-purple);
+        }
+
+        /* Navigation */
+        .tabs {
+            display: flex;
+            gap: 5px;
+            background: rgba(26, 26, 42, 0.7);
+            border-radius: 50px;
+            padding: 5px;
+            border: 1px solid var(--card-border);
+        }
+
+        .tab {
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .tab:hover::before {
+            left: 100%;
+        }
+
+        .tab.active {
+            background: var(--accent-purple);
+            color: #fff;
+            box-shadow: var(--glow-purple);
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .hero h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: var(--accent-blue);
+            text-shadow: var(--glow-blue);
+            letter-spacing: 1px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(65, 105, 225, 0.5); }
+            to { text-shadow: 0 0 20px var(--accent-blue), 0 0 30px rgba(65, 105, 225, 0.8); }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Products Section */
+        .ranks-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .rank-card {
+            background: linear-gradient(145deg, var(--card-bg), #0e0e1a);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .rank-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue), var(--accent-purple));
+            z-index: -1;
+            border-radius: 17px;
+            animation: border-glow 3s linear infinite;
+            background-size: 400%;
+        }
+
+        @keyframes border-glow {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        .rank-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(65, 105, 225, 0.3);
+        }
+
+        .rank-header {
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .vip .rank-header { background: rgba(50, 205, 50, 0.1); }
+        .vip-plus .rank-header { background: rgba(65, 105, 225, 0.1); }
+        .mvp .rank-header { background: rgba(138, 43, 226, 0.1); }
+        .mvp-plus .rank-header { background: rgba(255, 69, 0, 0.1); }
+        .elite .rank-header { background: rgba(255, 215, 0, 0.1); }
+
+        .rank-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: var(--glow-blue);
+        }
+
+        .vip .rank-title { color: var(--accent-green); }
+        .vip-plus .rank-title { color: var(--accent-blue); }
+        .mvp .rank-title { color: var(--accent-purple); }
+        .mvp-plus .rank-title { color: #ff4500; }
+        .elite .rank-title { color: var(--accent-gold); }
+
+        .rank-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 5px;
+        }
+
+        .rank-duration {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .rank-features {
+            padding: 25px;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            margin-bottom: 25px;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li i {
+            margin-right: 12px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(138, 43, 226, 0.2);
+            border-radius: 50%;
+            color: var(--accent-purple);
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--glow-purple);
+        }
+
+        .buy-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(25deg);
+            transition: all 0.5s;
+        }
+
+        .buy-btn:hover::after {
+            left: 120%;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.6);
+        }
+
+        /* Payment Section */
+        .payment-section {
+            background: linear-gradient(145deg, var(--card-bg), #0e0e1a);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 60px 0;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--accent-blue);
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            border-radius: 2px;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .payment-option {
+            flex: 1;
+            min-width: 250px;
+            background: rgba(26, 26, 42, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .payment-option:hover::before {
+            opacity: 1;
+        }
+
+        .payment-option:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(65, 105, 225, 0.2);
+        }
+
+        .payment-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-blue);
+        }
+
+        .payment-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-purple);
+        }
+
+        .payment-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .upi-id {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            margin: 20px 0;
+            border: 1px solid var(--accent-purple);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 18, 0.9);
+            padding: 50px 0 30px;
+            margin-top: 60px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(26, 26, 42, 0.7);
+            color: var(--accent-blue);
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            border: 1px solid var(--card-border);
+        }
+
+        .social-link:hover {
+            background: var(--accent-purple);
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: var(--glow-purple);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(138, 43, 226, 0.3);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100vw) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .tabs {
+                width: 100%;
+                overflow-x: auto;
+                padding: 5px;
+                justify-content: flex-start;
+            }
+            
+            .ranks-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .payment-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-skull-crossbones logo-icon"></i>
+                    <h1>ZOMBIECRAFT</h1>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active">
+                        <i class="fas fa-crown"></i> Ranks
+                    </div>
+                    <div class="tab">
+                        <i class="fas fa-coins"></i> Coins
+                    </div>
+                    <div class="tab">
+                        <i class="fas fa-key"></i> Keys
+                    </div>
+                    <div class="tab">
+                        <i class="fas fa-gem"></i> Tokens
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="hero">
+        <div class="container">
+            <h2>PREMIUM ZOMBIECRAFT STORE</h2>
+            <p class="subtitle">Unlock exclusive ranks, coins, keys, and tokens to enhance your survival experience in the ultimate Minecraft zombie apocalypse</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Ranks Section -->
+        <div class="ranks-container">
+            <!-- VIP Rank -->
+            <div class="rank-card vip">
+                <div class="rank-header">
+                    <div class="rank-title">VIP</div>
+                    <div class="rank-price">₹79</div>
+                    <div class="rank-duration">Lifetime Access</div>
+                </div>
+                <div class="rank-features">
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Colored Name & Chat</li>
+                        <li><i class="fas fa-check"></i> 2 Set Homes</li>
+                        <li><i class="fas fa-check"></i> Fly in Spawn</li>
+                        <li><i class="fas fa-check"></i> VIP Chat Tag</li>
+                        <li><i class="fas fa-check"></i> Exclusive VIP Lounge</li>
+                        <li><i class="fas fa-check"></i> Monthly VIP Kit</li>
+                    </ul>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+            
+            <!-- VIP+ Rank -->
+            <div class="rank-card vip-plus">
+                <div class="rank-header">
+                    <div class="rank-title">VIP+</div>
+                    <div class="rank-price">₹149</div>
+                    <div class="rank-duration">Lifetime Access</div>
+                </div>
+                <div class="rank-features">
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Reserved Slot</li>
+                        <li><i class="fas fa-check"></i> 4 Set Homes</li>
+                        <li><i class="fas fa-check"></i> Exclusive Pets</li>
+                        <li><i class="fas fa-check"></i> Early Event Access</li>
+                        <li><i class="fas fa-check"></i> Particle Trails</li>
+                        <li><i class="fas fa-check"></i> Monthly VIP+ Kit</li>
+                    </ul>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+            
+            <!-- MVP Rank -->
+            <div class="rank-card mvp">
+                <div class="rank-header">
+                    <div class="rank-title">MVP</div>
+                    <div class="rank-price">₹249</div>
+                    <div class="rank-duration">Lifetime Access</div>
+                </div>
+                <div class="rank-features">
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> 6 Set Homes</li>
+                        <li><i class="fas fa-check"></i> Fly Anywhere</li>
+                        <li><i class="fas fa-check"></i> Armor Stand Editor</li>
+                        <li><i class="fas fa-check"></i> /craft & /ec Commands</li>
+                        <li><i class="fas fa-check"></i> Monthly MVP Kit</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                    </ul>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+            
+            <!-- MVP+ Rank -->
+            <div class="rank-card mvp-plus">
+                <div class="rank-header">
+                    <div class="rank-title">MVP+</div>
+                    <div class="rank-price">₹400</div>
+                    <div class="rank-duration">Lifetime Access</div>
+                </div>
+                <div class="rank-features">
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> 8 Set Homes</li>
+                        <li><i class="fas fa-check"></i> /near Command</li>
+                        <li><i class="fas fa-check"></i> Monthly MVP+ Kit</li>
+                        <li><i class="fas fa-check"></i> Exclusive MVP+ Cosmetics</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                        <li><i class="fas fa-check"></i> Custom Particle Effects</li>
+                    </ul>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+            
+            <!-- Elite Rank -->
+            <div class="rank-card elite">
+                <div class="rank-header">
+                    <div class="rank-title">ELITE</div>
+                    <div class="rank-price">₹1000</div>
+                    <div class="rank-duration">Lifetime Access</div>
+                </div>
+                <div class="rank-features">
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Unlimited Set Homes</li>
+                        <li><i class="fas fa-check"></i> 5x Legendary Keys/Month</li>
+                        <li><i class="fas fa-check"></i> ELITE Chat Tag</li>
+                        <li><i class="fas fa-check"></i> Server Priority</li>
+                        <li><i class="fas fa-check"></i> Grim Reaper Kit</li>
+                        <li><i class="fas fa-check"></i> Monthly ELITE Kit</li>
+                    </ul>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Payment Options -->
+        <div class="payment-section">
+            <h2 class="section-title">SECURE PAYMENT METHODS</h2>
+            
+            <div class="payment-options">
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <i class="fab fa-google-pay"></i>
+                    </div>
+                    <h3 class="payment-title">Google Pay</h3>
+                    <p class="payment-description">Instant payment with Google Pay UPI</p>
+                    <div class="upi-id">9737212065@ybl</div>
+                    <button class="buy-btn">Pay with Google Pay</button>
+                </div>
+                
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="payment-title">PhonePe</h3>
+                    <p class="payment-description">Fast and secure PhonePe transactions</p>
+                    <div class="upi-id">9737212065@ybl</div>
+                    <button class="buy-btn">Pay with PhonePe</button>
+                </div>
+                
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3 class="payment-title">UPI Transfer</h3>
+                    <p class="payment-description">Direct UPI payment to our ID</p>
+                    <div class="upi-id">9737212065@ybl</div>
+                    <button class="buy-btn">Pay via UPI</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About ZombieCraft</h3>
+                    <p>ZombieCraft is a survival Minecraft server with custom zombies, unique gameplay mechanics, and an active community. Survive the apocalypse with friends!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><i class="fas fa-server"></i> Server IP: play.zombiecraft.xyz</p>
+                    <p><i class="fas fa-book"></i> Server Rules</p>
+                    <p><i class="fas fa-download"></i> Resource Packs</p>
+                    <p><i class="fas fa-question-circle"></i> Support Center</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> support@zombiecraft.xyz</p>
+                    <p><i class="fab fa-discord"></i> ZombieCraft Discord</p>
+                    <p><i class="fas fa-phone"></i> +91 9737212065</p>
+                    <p><i class="fas fa-map-marker-alt"></i> India</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 ZombieCraft Premium Store. All rights reserved.</p>
+                <p>This is an official store for ZombieCraft Minecraft Server</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Create particle background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size
+                const size = Math.random() * 15 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // Random color
+                const colors = ['rgba(138, 43, 226, 0.5)', 'rgba(65, 105, 225, 0.5)', 'rgba(50, 205, 50, 0.3)'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random animation duration
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create particles
+            createParticles();
+            
+            // Animation for cards on page load
+            const cards = document.querySelectorAll('.rank-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 200 * index);
+            });
+            
+            // Tab switching functionality
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                });
+            });
+            
+            // Buy button animation
+            document.querySelectorAll('.buy-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-check"></i> Payment Successful!';
+                        this.style.background = 'linear-gradient(90deg, #32CD32, #228B22)';
+                    }, 1500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
